@@ -47,4 +47,4 @@ bin/ct-%-x86_64-apple-darwin: GOARGS = GOOS=darwin GOARCH=amd64
 bin/ct-%-x86_64-pc-windows-gnu.exe: GOARGS = GOOS=windows GOARCH=amd64
 
 bin/%: | gopath
-	$(Q)$(GOARGS) go build -o $@ -ldflags $(LD_FLAGS) $(REPO)/internal
+	$(Q)$(GOARGS) go build -o $@ -ldflags $(LD_FLAGS) $(REPO)/cmd/ct
