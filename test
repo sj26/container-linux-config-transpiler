@@ -37,6 +37,6 @@ echo "Running tests..."
 go test $PKGS -cover
 
 echo "Checking documentation..."
-go run internal/util/tools/docs.go
+go run cmd/internal/docs/main.go
 
 echo "Success"
