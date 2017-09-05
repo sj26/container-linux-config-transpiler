@@ -1,11 +1,12 @@
-FROM golang:alpine
-ENV CGO_ENABLED=0
-WORKDIR $GOPATH/src/github.com/coreos/container-linux-config-transpiler
-COPY . .
-RUN apk update && apk add --virtual .build-deps bash git \
-    && ./build \
-    && mv bin/ct /usr/bin/ && mv Dockerfile.build-scratch /tmp \
-    && rm -rf $GOPATH \
-    && apk del .build-deps && rm -rf /var/cache/apk
-WORKDIR /tmp
-ENTRYPOINT ["/usr/bin/ct"]
+FROM golang
+ENV REPO=github.com/coreos/container-linux-config-transpiler
+COPY . $GOPATH/src/$REPO
+WORKDIR $GOPATH/src/$REPO
+# Supply version like: docker build --build-arg VERSION="$(git describe HEAD)" .
+ARG VERSION
+RUN CGO_ENABLED=0 go build -o /ct -ldflags "-w -X $REPO/internal/version.Raw=$VERSION" ./cmd/ct
+
+FROM scratch
+COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=0 /ct /ct
+ENTRYPOINT ["/ct"]
