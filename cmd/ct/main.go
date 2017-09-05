@@ -24,7 +24,6 @@ import (
 
 	"github.com/coreos/container-linux-config-transpiler/config"
 	"github.com/coreos/container-linux-config-transpiler/config/platform"
-	"github.com/coreos/container-linux-config-transpiler/internal/version"
 )
 
 func stderr(f string, a ...interface{}) {
@@ -59,7 +58,7 @@ func main() {
 	}
 
 	if flags.version {
-		fmt.Println(version.String)
+		fmt.Println(Version)
 		return
 	}
 

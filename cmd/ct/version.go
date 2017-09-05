@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package version
+package main
 
 import (
 	"fmt"
 )
 
 var (
-	Raw    = "was not built properly"
-	String = fmt.Sprintf("ct %s", Raw)
+	RawVersion = "was not built properly"
+	Version    = fmt.Sprintf("ct %s", RawVersion)
 )

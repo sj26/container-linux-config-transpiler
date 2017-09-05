@@ -11,7 +11,7 @@ endif
 
 VERSION=$(shell git describe --dirty)
 REPO=github.com/coreos/container-linux-config-transpiler
-LD_FLAGS="-w -X $(REPO)/internal/version.Raw=$(VERSION)"
+LD_FLAGS="-w -X $(REPO)/cmd/ct.RawVersion=$(VERSION)"
 
 export GOPATH=$(shell pwd)/gopath
 export CGO_ENABLED:=0
